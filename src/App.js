@@ -1,3 +1,4 @@
+// importing all important files
 import HomePage from "./components/Home/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -10,14 +11,14 @@ import Footer from "./components/NavBar/Footer";
 import axios from "axios";
 import NewTaskFormComponent from "./components/Tasks/newTask";
 import TaskListComponent from "./components/Tasks/viewTasks";
+// set base url of backend
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
-// axios.defaults.withCredentials = true;
 function App() {
-  // const user = localStorage.getItem("token");
+  // for user auth
   const user = getTokenCookie();
-
   return (
     <>
+      {/* toaster for noti */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -33,23 +34,28 @@ function App() {
         <Navbar />
         <BrowserRouter>
           <Routes>
+            {/* home route */}
             <Route
               index
               path="/"
               element={user ? <HomePage /> : <LoginPage />}
             />
+            {/* login route */}
             <Route
               path="/login"
               element={!user ? <LoginPage /> : <HomePage />}
             />
+            {/* register route */}
             <Route
               path="/register"
               element={!user ? <SignupPage /> : <HomePage />}
             />
+            {/* add new task route */}
             <Route
               path="/new-task"
               element={!user ? <LoginPage /> : <NewTaskFormComponent />}
             />
+            {/* all task showing */}
             <Route
               path="/view-tasks"
               element={!user ? <LoginPage /> : <TaskListComponent />}

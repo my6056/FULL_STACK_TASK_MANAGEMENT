@@ -1,3 +1,4 @@
+// importing all
 import axios from "axios";
 import React, { useState } from "react";
 import { FaLock, FaEye, FaEyeSlash, FaEnvelopeOpenText } from "react-icons/fa";
@@ -9,16 +10,23 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import Loading from "../../Loader/loading";
 import usePasswordStrength from "../../Reusebale/usePasswordStrength";
+
+// Importing end
+
 const LoginPage = () => {
+  // for state work
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { passwordStrength, isValidPassword, handlePasswordChange } =
     usePasswordStrength();
+  // form data setup
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  // input chaange
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
@@ -26,11 +34,11 @@ const LoginPage = () => {
       [name]: value,
     }));
   };
-
+  // password toggle function
   const handleTogglePassword = () => {
     setShowPassword((prevState) => !prevState);
   };
-
+  // login function to login
   const HandleLogin = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -66,6 +74,7 @@ const LoginPage = () => {
       });
   };
 
+  // return jsx for login page
   return (
     <>
       <div id="Login-Page">

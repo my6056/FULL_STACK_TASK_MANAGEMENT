@@ -1,9 +1,12 @@
-import { useState } from 'react';
+// importin useState
+import { useState } from "react";
 
+// password strength for reusable
 const usePasswordStrength = () => {
-  const [passwordStrength, setPasswordStrength] = useState('');
+  const [passwordStrength, setPasswordStrength] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(true);
 
+  // input change handle
   const handlePasswordChange = (event) => {
     const password = event.target.value;
 
@@ -12,17 +15,19 @@ const usePasswordStrength = () => {
     setPasswordStrength(strength);
 
     // Check if password is valid
-    setIsValidPassword(strength !== 'Weak');
+    setIsValidPassword(strength !== "Weak");
   };
 
+  // check strenght of password
   const calculatePasswordStrength = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     if (password.match(regex)) {
-      return 'Strong';
+      return "Strong";
     } else if (password.length >= 6) {
-      return 'Medium';
+      return "Medium";
     } else {
-      return 'Weak';
+      return "Weak";
     }
   };
 

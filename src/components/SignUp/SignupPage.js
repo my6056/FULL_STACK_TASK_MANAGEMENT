@@ -1,3 +1,4 @@
+// importing important files
 import React, { useState } from "react";
 import {
   FaUser,
@@ -14,11 +15,17 @@ import {
 } from "../../Notification/Notify";
 import usePasswordStrength from "../../Reusebale/usePasswordStrength";
 import Loading from "../../Loader/loading";
+// importing end
+
+// signup component
+
 const SignupPage = () => {
+  // state use
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { passwordStrength, isValidPassword, handlePasswordChange } =
     usePasswordStrength();
+  // data use
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,6 +33,7 @@ const SignupPage = () => {
     confirmPassword: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // input chaange
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
@@ -33,10 +41,11 @@ const SignupPage = () => {
       [name]: value,
     }));
   };
-
+  // pssword show hide
   const handleTogglePassword = () => {
     setShowPassword((prevState) => !prevState);
   };
+  // register function
   const HandleRegister = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -72,9 +81,10 @@ const SignupPage = () => {
         return;
       });
   };
+
+  // return jsx for register
   return (
     <>
-      {" "}
       <div id="SignUp-Page">
         <div className="signup-form">
           <h2>Create an Account</h2>

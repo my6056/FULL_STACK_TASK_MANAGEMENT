@@ -1,8 +1,10 @@
+// importing important files
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import { FaAngleLeft } from "react-icons/fa";
+
 import { useNavigate } from "react-router-dom";
 import { getTokenCookie } from "../../Context/CookieGet";
 import axios from "axios";
@@ -10,7 +12,10 @@ import {
   showNotificationForError,
   showNotificationForSuccess,
 } from "../../Notification/Notify";
+import Loading from "../../Loader/loading";
+// form component for new tsk
 const NewTaskFormComponent = () => {
+  // user auth use
   const navigate = useNavigate();
   const user = getTokenCookie();
   let userId = "";
@@ -18,17 +23,21 @@ const NewTaskFormComponent = () => {
     const tokenPayload = JSON.parse(atob(user.split(".")[1]));
     userId = tokenPayload.userId; // Assign the value to userName
   }
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  // back button handles
   const hadnleBack = () => {
     navigate(-1);
     return;
   };
+
+  // task data
   const [newTask, setNewTask] = useState({
     title: "",
     description: "",
     due_date: "",
     status: "pending",
   });
-
+  // input change
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setNewTask((prevTask) => ({
@@ -36,30 +45,34 @@ const NewTaskFormComponent = () => {
       [name]: value,
     }));
   };
-
+  // new task creation function
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
     try {
       const result = await axios.post(`/task/${userId}/create_task`, newTask);
       if (result.data.status === true) {
+        setIsSubmitting(false);
         showNotificationForSuccess(result.data.message);
-        navigate("/view-tasks");
+        setTimeout(() => {
+          navigate("/view-tasks");
+        }, 3000);
         window.location.reload();
         return;
       } else {
+        setIsSubmitting(false);
         showNotificationForError(result.data.message);
-        // window.location.reload();
         return;
       }
     } catch (error) {
-      console.log("error", error.message);
+      setIsSubmitting(false);
       showNotificationForError(error.message);
-      // window.location.reload();
       return;
     }
   };
 
   return (
+    // return jsx for task form
     <div id="taskPage">
       <form className="task-form" onSubmit={handleSubmit}>
         <TextField
@@ -117,18 +130,23 @@ const NewTaskFormComponent = () => {
         </TextField>
         <br />
         <br />
-        <Button
-          type="submit"
-          variant="contained"
-          startIcon={<AddIcon />}
-          className="task-form-button"
-        >
-          Create Task
-        </Button>
+        {isSubmitting ? (
+          <div className="loader">
+            <Loading />
+          </div>
+        ) : (
+          <Button
+            type="submit"
+            variant="contained"
+            startIcon={<AddIcon />}
+            className="task-form-button"
+          >
+            Create Task
+          </Button>
+        )}
         <div className="back-page">
           <button className="back-button-icon" onClick={hadnleBack}>
-            {" "}
-            <FaAngleLeft />{" "}
+            <FaAngleLeft />
           </button>
         </div>
       </form>

@@ -1,3 +1,4 @@
+// importing important files
 import React, { useState, useEffect } from "react";
 import { getTokenCookie } from "../../Context/CookieGet";
 import axios from "axios";
@@ -6,37 +7,14 @@ import {
   showNotificationForSuccess,
 } from "../../Notification/Notify";
 import TaskPopup from "./TaskPopup";
+
+// task list component
 const TaskListComponent = () => {
+  // use state
   const [tasks, setTasks] = useState([]);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [isReloaded, setIsReloaded] = useState(false);
-  const handleToggleDescription = (taskId) => {
-    setExpandedTaskId((prevState) => (prevState === taskId ? null : taskId));
-  };
-  const user = getTokenCookie();
-  let userId = "";
-  if (user) {
-    const tokenPayload = JSON.parse(atob(user.split(".")[1]));
-    userId = tokenPayload.userId; // Assign the value to userName
-  }
-  const [isPopupOpen, setPopupOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState({
-    title: "",
-    description: "",
-    due_date: "",
-    status: "pending",
-  });
-  const [taskIdToUpdate, setTaskIdToUpdate] = useState(null);
-  const handleEditClick = (task) => {
-    setSelectedTask(task);
-    setTaskIdToUpdate(task._id);
-    setPopupOpen(true);
-  };
-
-  const handleClosePopup = () => {
-    setPopupOpen(false);
-    setTaskIdToUpdate(null);
-  };
+  // for show all task in page when render
   useEffect(() => {
     // Function to fetch tasks from the backend
     const fetchTasks = async () => {
@@ -44,7 +22,8 @@ const TaskListComponent = () => {
         const response = await axios.get(`/task/${userId}/get_tasks`);
         if (response.data.status === true) {
           const tasksData = await response.data.tasks;
-          setTasks(tasksData);
+          const sortedTasks = sortTaskByCreation(tasksData);
+          setTasks(sortedTasks);
           setIsReloaded(false);
           return;
         } else {
@@ -62,7 +41,46 @@ const TaskListComponent = () => {
       fetchTasks();
     }
   }, [isReloaded]);
+  // task sorting function
+  const sortTaskByCreation = (tasksData) => {
+    // sorting here
+    return tasksData.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  };
 
+  const handleToggleDescription = (taskId) => {
+    setExpandedTaskId((prevState) => (prevState === taskId ? null : taskId));
+  };
+  // use auth use
+  const user = getTokenCookie();
+  let userId = "";
+  if (user) {
+    const tokenPayload = JSON.parse(atob(user.split(".")[1]));
+    userId = tokenPayload.userId; // Assign the value to userName
+  }
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  // data for task
+  const [selectedTask, setSelectedTask] = useState({
+    title: "",
+    description: "",
+    due_date: "",
+    status: "pending",
+  });
+  const [taskIdToUpdate, setTaskIdToUpdate] = useState(null);
+  // popup show hide handle
+  const handleEditClick = (task) => {
+    setSelectedTask(task);
+    setTaskIdToUpdate(task._id);
+    setPopupOpen(true);
+  };
+  // close popup
+  const handleClosePopup = () => {
+    setPopupOpen(false);
+    setTaskIdToUpdate(null);
+  };
+
+  // haandle task update function
   const handleUpdateTask = async (updatedTask) => {
     const taskId = taskIdToUpdate;
     try {
@@ -86,6 +104,7 @@ const TaskListComponent = () => {
     }
   };
 
+  // delete tsk handle
   const handleDeleteTask = async (taskId) => {
     try {
       alert("Are you sure to delete this task ?");
@@ -105,6 +124,7 @@ const TaskListComponent = () => {
       return;
     }
   };
+  // date formate
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, "0");
@@ -112,6 +132,8 @@ const TaskListComponent = () => {
     const year = date.getFullYear();
     return `${day}-${month}-${year}`;
   };
+
+  // jsx return for viewtask
   return (
     <div className="task-list-container">
       <h2 className="task-list-title">All Tasks</h2>

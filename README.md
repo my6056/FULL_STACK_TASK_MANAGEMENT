@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Task Management Web App - README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a task management web application with a connected backend API. It allows users to register, login, add new tasks, and view their existing tasks. The frontend of the application is built using React, and the backend API is connected using Axios. The project utilizes React Router for navigation and React Toastify for displaying notifications.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User Registration: Users can register for a new account using the "Register" page.
+- User Login: Existing users can log in using their credentials on the "Login" page.
+- Home Page: After login, users are redirected to the home page, where they can view their tasks.
+- Add New Task: Authenticated users can add new tasks using the "New Task" page.
+- View Tasks: Authenticated users can view all their existing tasks on the "View Tasks" page.
+- Toast Notifications: Users receive toast notifications for important actions or events.
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Before running the application, ensure you have the following:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js and npm installed on your machine.
+- Backend API server running and accessible with the appropriate base URL.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Follow the steps below to set up and run the Task Management Web App:
 
-### `npm run build`
+1. Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone `https://github.com/saurabhdixit93/FULL_STACK_USER_TASK`
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Change into the project directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd FULL_STACK_USER_TASK
+```
 
-### `npm run eject`
+3. Install the project dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Set the base URL for the backend API:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+In the `App.js` file, make sure to set the `REACT_APP_BASE_URL` environment variable to the base URL of your backend API. For example:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+axios.defaults.baseURL = "http://your-backend-api.com";
+```
 
-## Learn More
+5. Start the development server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The web application will now be accessible in your web browser at `http://localhost:3000`.
 
-### Code Splitting
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Register**: Access the web application and click on the "Register" link in the navigation bar. Fill out the registration form with your details and click the "Register" button. You will be redirected to the home page after successful registration.
 
-### Analyzing the Bundle Size
+2. **Login**: If you already have an account, click on the "Login" link in the navigation bar. Enter your login credentials and click the "Login" button. Upon successful login, you will be redirected to the home page.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. **Home Page**: The home page displays your tasks. If you are not logged in, it will redirect you to the login page. To add a new task, click on the "Add New Task" button.
 
-### Making a Progressive Web App
+4. **Add New Task**: Fill out the task details in the form and click the "Add Task" button to create a new task. After adding the task, you will be redirected to the home page.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+5. **View Tasks**: Click on the "View Tasks" link in the navigation bar to see all your existing tasks.
 
-### Advanced Configuration
+6. **Toast Notifications**: You will receive toast notifications for actions such as successful task addition or login failure.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Contributing
 
-### Deployment
+If you wish to contribute to this project, feel free to fork the repository and submit a pull request with your changes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## License
 
-### `npm run build` fails to minify
+This project is licensed under the [MIT License](LICENSE).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Acknowledgments
+
+- This project was built using React and Axios.
+- The frontend routing is handled by React Router.
+- Toast notifications are displayed using React Toastify.
+
+## Contact
+
+If you have any questions or issues, please contact the project maintainers:
+
+- Maintainer: [Saurabh Dixit](mailto:smartds2550@gmail.com)
+- Project Link: [GitHub Repository](https://github.com/saurabhdixit93/FULL_STACK_USER_TASK)

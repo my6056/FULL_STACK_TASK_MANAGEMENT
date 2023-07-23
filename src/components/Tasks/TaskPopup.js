@@ -1,12 +1,15 @@
+// importing important files
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
+// tsk popup component
 const TaskPopup = ({ isOpen, onClose, onUpdateTask, task }) => {
+  // state use
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
   const [dueDate, setDueDate] = useState(task.due_date);
   const [status, setStatus] = useState(task.status);
 
+  // submittion handle
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedTask = {
@@ -21,6 +24,7 @@ const TaskPopup = ({ isOpen, onClose, onUpdateTask, task }) => {
   };
 
   return (
+    // return jsx for popup
     <div className={`task-popup ${isOpen ? "open" : ""}`}>
       <div className="task-popup-content">
         <span className="close" onClick={onClose}>

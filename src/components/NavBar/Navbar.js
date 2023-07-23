@@ -1,3 +1,4 @@
+// importing cookie and some neccsery files
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -7,7 +8,12 @@ import {
   showNotificationForSuccess,
 } from "../../Notification/Notify";
 import Cookies from "js-cookie";
+
+// importing end
+
+// navbar component
 const Navbar = () => {
+  // for auth use
   const user = getTokenCookie();
   let name = ""; // Initialize with an empty string
   let email = "";
@@ -16,12 +22,12 @@ const Navbar = () => {
     name = tokenPayload.name; // Assign the value to userName
     email = tokenPayload.email;
   }
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // menu close open
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+  // logout function
   const Logout = async (e) => {
     alert("Are you sure to logout");
     try {
@@ -37,14 +43,12 @@ const Navbar = () => {
     }
   };
   return (
+    // return nav jsx
     <div>
-      <span className="background"></span>{" "}
+      <span className="background"></span>
       <div className="menu__wrapper">
-        {" "}
         <div className="menu__bar">
-          {" "}
           <a href="/" title="Logo">
-            {" "}
             <img
               className="logo"
               src={"https://img.icons8.com/nolan/96/bluestacksx.png"}
@@ -57,11 +61,10 @@ const Navbar = () => {
             icon={isMenuOpen ? faTimes : faBars}
             title={isMenuOpen ? "Close Menu" : "Burger Menu"}
             onClick={toggleMenu}
-          />{" "}
+          />
           <menu
             className={`navigation ${isMenuOpen ? "navigation--mobile" : ""}`}
           >
-            {" "}
             {user && (
               <>
                 <li>{name}</li> <li>{email}</li>

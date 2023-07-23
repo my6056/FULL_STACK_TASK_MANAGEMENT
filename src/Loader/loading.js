@@ -1,5 +1,6 @@
 import React from "react";
 
+// loder
 const Loading = () => {
   return (
     <div className="container">
