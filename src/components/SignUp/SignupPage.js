@@ -9,19 +9,20 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
-  showNotificationForRegisterError,
-  showNotificationForRegisterSuccess,
+  showNotificationForError,
+  showNotificationForSuccess,
 } from "../../Notification/Notify";
 import usePasswordStrength from "../../Reusebale/usePasswordStrength";
 import Loading from "../../Loader/loading";
 const SignupPage = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { passwordStrength, isValidPassword, handlePasswordChange } = usePasswordStrength();
+  const { passwordStrength, isValidPassword, handlePasswordChange } =
+    usePasswordStrength();
   const [formData, setFormData] = useState({
-    userName: "",
-    userEmail: "",
-    userPassword: "",
+    name: "",
+    email: "",
+    password: "",
     confirmPassword: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,20 +41,20 @@ const SignupPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     await axios
-      .post("/user/api/signup", formData)
+      .post("/user/sign_up", formData)
       .then((result) => {
         if (result.data.status === true) {
           setIsSubmitting(false);
-          showNotificationForRegisterSuccess(result.data.message);
+          showNotificationForSuccess(result.data.message);
           navigate("/login");
           return;
         } else {
           setIsSubmitting(false);
-          showNotificationForRegisterError(result.data.message);
+          showNotificationForError(result.data.message);
           setFormData({
-            userName: "",
-            userEmail: "",
-            userPassword: "",
+            name: "",
+            email: "",
+            password: "",
             confirmPassword: "",
           });
           return;
@@ -61,11 +62,11 @@ const SignupPage = () => {
       })
       .catch((error) => {
         setIsSubmitting(false);
-        showNotificationForRegisterError(error.message);
+        showNotificationForError(error.message);
         setFormData({
-          userName: "",
-          userEmail: "",
-          userPassword: "",
+          name: "",
+          email: "",
+          password: "",
           confirmPassword: "",
         });
         return;
@@ -80,16 +81,16 @@ const SignupPage = () => {
           <form onSubmit={HandleRegister}>
             <div className="form-group">
               <label htmlFor="userName">
-                <FaUser /> Username
+                <FaUser /> Name
               </label>
               <input
                 type="text"
                 id="userName"
-                name="userName"
-                value={formData.userName}
+                name="name"
+                value={formData.name}
                 onChange={handleInputChange}
                 required
-                placeholder="Enter valid UserName"
+                placeholder="Enter valid Name"
               />
             </div>
             <div className="form-group">
@@ -99,34 +100,43 @@ const SignupPage = () => {
               <input
                 type="text"
                 id="userEmail"
-                name="userEmail"
-                value={formData.userEmail}
+                name="email"
+                value={formData.email}
                 onChange={handleInputChange}
                 required
                 placeholder="Enter valid Email"
               />
             </div>
-            <div className="form-group">            
+            <div className="form-group">
               <label htmlFor="password">
-                <FaLock /> Password 
+                <FaLock /> Password
               </label>
-              <div className="password-input">              
+              <div className="password-input">
                 <input
                   type={"password"}
                   id="password"
-                  name="userPassword"
-                  value={formData.userPassword}
+                  name="password"
+                  value={formData.password}
                   onChange={(event) => {
                     handleInputChange(event);
                     handlePasswordChange(event);
                   }}
-                  className={!isValidPassword ? 'invalid' : ''}
+                  className={!isValidPassword ? "invalid" : ""}
                   required
                   placeholder="Enter valid Password"
                 />
               </div>
-              <div className={`password-strength ${!isValidPassword && 'invalid'}`}>{passwordStrength}</div>
-              {!isValidPassword && <p className="password-error">Password should be min 6 digits with one special and Capital Letter</p>}
+              <div
+                className={`password-strength ${!isValidPassword && "invalid"}`}
+              >
+                {passwordStrength}
+              </div>
+              {!isValidPassword && (
+                <p className="password-error">
+                  Password should be min 6 digits with one special and Capital
+                  Letter
+                </p>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="confirmPassword">
@@ -161,7 +171,7 @@ const SignupPage = () => {
           <div className="line">
             <span>Or</span>
           </div>
-          <div className="form-group">         
+          <div className="form-group">
             <Link className="ToPath" to={"/login"}>
               Login
             </Link>

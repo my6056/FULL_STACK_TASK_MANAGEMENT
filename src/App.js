@@ -7,12 +7,11 @@ import SignupPage from "./components/SignUp/SignupPage";
 import Navbar from "./components/NavBar/Navbar";
 import LoginPage from "./components/Login/LoginPage";
 import Footer from "./components/NavBar/Footer";
-import SendOTP from "./components/SendOtp/OtpSend";
-import OtpVerification from "./components/VerifyOtp/verifyOtp";
-import UserDetailsUpdate from "./components/UserUpdate/UpdateDetails";
 import axios from "axios";
+import NewTaskFormComponent from "./components/Tasks/newTask";
+import TaskListComponent from "./components/Tasks/viewTasks";
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 function App() {
   // const user = localStorage.getItem("token");
   const user = getTokenCookie();
@@ -48,15 +47,12 @@ function App() {
               element={!user ? <SignupPage /> : <HomePage />}
             />
             <Route
-              path="/send-otp"
-              element={!user ? <SendOTP /> : <HomePage />}
+              path="/new-task"
+              element={!user ? <LoginPage /> : <NewTaskFormComponent />}
             />
             <Route
-              path="/verify-otp"
-              element={!user ? <OtpVerification /> : <HomePage />}
-            />
-            <Route path="/update-details"
-              element={user ? <UserDetailsUpdate /> : <LoginPage />}
+              path="/view-tasks"
+              element={!user ? <LoginPage /> : <TaskListComponent />}
             />
           </Routes>
         </BrowserRouter>

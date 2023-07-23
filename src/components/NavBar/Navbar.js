@@ -2,19 +2,39 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { getTokenCookie } from "../../Context/CookieGet";
+import {
+  showNotificationForError,
+  showNotificationForSuccess,
+} from "../../Notification/Notify";
+import Cookies from "js-cookie";
 const Navbar = () => {
   const user = getTokenCookie();
-  let userName = ""; // Initialize with an empty string
-  let userEmail = "";
+  let name = ""; // Initialize with an empty string
+  let email = "";
   if (user) {
     const tokenPayload = JSON.parse(atob(user.split(".")[1]));
-    userName = tokenPayload.userName; // Assign the value to userName
-    userEmail = tokenPayload.userEmail;
+    name = tokenPayload.name; // Assign the value to userName
+    email = tokenPayload.email;
   }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const Logout = async (e) => {
+    alert("Are you sure to logout");
+    try {
+      if (user) {
+        Cookies.remove("token");
+        showNotificationForSuccess("Logout Successfull");
+        window.location.reload();
+        return;
+      }
+    } catch (error) {
+      showNotificationForError(error.message);
+      return;
+    }
   };
   return (
     <div>
@@ -44,14 +64,17 @@ const Navbar = () => {
             {" "}
             {user && (
               <>
-                <li>{userName}</li> <li>{userEmail}</li>
+                <li>{name}</li> <li>{email}</li>
+                <li>
+                  <button className="Logout-bttn" onClick={Logout}>
+                    Logout
+                  </button>
+                </li>
               </>
             )}
-            <li>About</li>
-            <li>Contact Us</li>{" "}
-          </menu>{" "}
-        </div>{" "}
-      </div>{" "}
+          </menu>
+        </div>
+      </div>
     </div>
   );
 };

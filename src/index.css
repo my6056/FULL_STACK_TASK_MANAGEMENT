@@ -788,3 +788,290 @@ input {
     height: 30px;
   }
 }
+
+/* Stylish logout button */
+.Logout-bttn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  background-color: #ff0000b5; /* Green background color */
+  color: white; /* White text color */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.Logout-bttn:hover {
+  background-color:  #ff0000;/* Darker green color on hover */
+}
+
+.Logout-bttn:focus {
+  outline: none; /* Remove the default focus outline */
+}
+/* NewTaskFormComponent.css */
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-form-input {
+  width: 100%;
+}
+
+.task-form-button {
+  background-color: #007bff;
+  color: #fff;
+  margin-top: 20px;
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+#taskPage{
+  margin-top: 100px;
+}
+@media screen and (min-width: 768px) {
+  /* Apply responsive styles for screens with a minimum width of 768px */
+  .task-form {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+/* StylishLinkComponent.css */
+
+/* Reset default link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/* Styling for the container div */
+.other_path {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Styling for the "create new task" link */
+.create-task,
+.view-tasks {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  color: #007bff;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover style for the links */
+.create-task:hover,
+.view-tasks:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Active style for the links */
+.create-task.active,
+.view-tasks.active {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+
+
+/* TaskListComponent.css */
+
+.task-list-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  min-height: 85vh;
+  height: 100%;
+}
+
+.task-list-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-item.expanded {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.task-status {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #826b6b;
+}
+
+.task-status.todo {
+  background-color: #f39c12;
+}
+.due_date {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+.task-status.inprogress {
+  background-color: #3498db;
+}
+
+.task-status.completed {
+  background-color: #27ae60;
+}
+
+.task-details {
+  margin-bottom: 10px;
+}
+
+.task-description {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-btn,
+.delete-btn,
+.archive-btn,
+.collapse-btn {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.edit-btn {
+  background-color: #3498db;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+}
+
+.archive-btn {
+  background-color: #9b59b6;
+}
+
+.collapse-btn {
+  background-color: #f39c12;
+}
+
+/* TaskPopup.css */
+.task-popup {
+  margin-top: 100px;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.task-popup.open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-popup-content {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 20px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.task-popup-content h2 {
+  margin-top: 0;
+}
+
+.task-popup-content .close {
+  cursor: pointer;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.task-popup-content .form-group {
+  margin-bottom: 20px;
+}
+
+.task-popup-content label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.task-popup-content input,
+.task-popup-content textarea,
+.task-popup-content select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.task-popup-content button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.task-popup-content button:hover {
+  background-color: #45a049;
+}
